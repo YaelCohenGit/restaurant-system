@@ -1,0 +1,100 @@
+<div *ngIf="loading" class="loader"></div>
+<body style="background-color: black;">
+  <div
+    style="background-color: white; border: 5px goldenrod solid; width: 500px; position: absolute;left: 50%;transform: translateX(-50%);top:5%">
+    <div class="modal-header" style=" background-color: black;color: goldenrod;">
+      <h4 style="margin-left: 40%;" class="modal-title" id="modal-basic-title">Welcome</h4>
+    </div>
+    <form (ngSubmit)="onSubmitForm()" disabled="!loginForm.valid" #loginForm="ngForm">
+      <div class="md-form mb-5" style="margin-left: 20%;">
+        <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+        <input style="width: 250px;color: #000;" #name type="text" class="form-control" mdbInput
+          [(ngModel)]="userNameValue" [ngModelOptions]="{standalone: true}" MinLength="2" required
+          (change)="onlyLetters()" [appOnlyLetters]="name" mdbTooltip="First name and then last name"
+          placement="bottom">
+        <label for="form34" style="color: #000;">Full name</label>
+        <mdb-error *ngIf="(name.invalid && (name.dirty || name.touched)) ||name.value==='' && flag">
+          Input invalid
+        </mdb-error>
+        <mdb-success *ngIf="name.valid && (name.dirty || name.touched)">
+        </mdb-success>
+      </div>
+      <div class="md-form mb-5" style="margin-left: 20%;">
+        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+        <input style="width: 250px;color: #000;" appOnlyNumbers #password [appOnlyNumbers]="password" type="password"
+          class="form-control" mdbInput id="float-input" [(ngModel)]="passwordValue"
+          [ngModelOptions]="{standalone: true}" maxlength="3" [min]=0 [max]=999 oninput="validity.valid||(value='')"
+          required>
+        <label for="form34" style="color: #000;">Password</label>
+        <mdb-error *ngIf="(password.invalid && (password.dirty || password.touched)) ||password.value==='' && flag">
+          Input invalid
+        </mdb-error><br
+          *ngIf="(password.invalid && (password.dirty || password.touched)) ||password.value==='' && flag">
+        <mdb-success *ngIf="password.valid && (password.dirty || password.touched)">
+        </mdb-success>
+        <a class="forgot" (click)="closeDialog()" [routerLink]="['/forgot-password']"
+          routerLinkActive="activeClass">forgot password ?</a>
+        <br><br>
+        <button type="submit" mdbBtn class="btnSubmit" mdbWavesEffect>Login
+        </button>
+      </div>
+    </form>
+  </div>
+  <p-carousel [value]="pictures" orientation="vertical" [style]="{'max-width':'270px'}" verticalViewPortHeight="800px"
+    [numVisible]="1" [numScroll]="0.25" [circular]="true" [autoplayInterval]="3000">
+    <ng-template let-product pTemplate="item">
+      <div class="product-item">
+        <div class="product-item-content">
+          <div class="p-mb-3">
+          </div>
+          <div class="view overlay zoom" *ngFor="let p of pictures">
+            <img style="width: 270px;height: 200px;padding: 0.6rem;" [src]="p.imgSrc" class="img-fluid ">
+            <div class="mask flex-center">
+              <p class="white-text">{{p.foodName}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+  <footer id="footer"
+    style="background-color: black;font-family: ui-monospace;width: 800px;position: absolute;left: 50%;transform: translateX(-50%);">
+    <p class="animated bounce" style="text-align: center;color: white;font-size: 100px;">Caramel</p>
+    <p style="text-align: center;color:white;font-size: 30px;margin-top: -1%;">Luxury Restaurant</p>
+    <img class="animated flash" src="assets/5stars.PNG" alt="5 stars"
+      style="position: absolute;left: 50%;transform: translateX(-50%);">
+    <br><br>
+    <p style="margin-top: 6%; text-align: center;color:white;font-size: 16px;font-family: system-ui !important;">
+      <label style="text-align: center;color:white;font-size: 20px;">© </label>
+      Characterization,construction and design <br>
+      Sari Gutman | sarig2072@gmail.com & Ruth Cohen | ruth8530834@gmail.com | 2021
+      <br>
+      <a style="color: goldenrod;" href='https://www.freepik.com/photos' target="_blank">Photos Designed by Freepik www.freepik.com</a></p>
+  </footer>
+</body>
+
+<!--
+<a href='https://www.freepik.com/photos/food'>Food photo created by azerbaijan_stockers - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by wirestock - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by azerbaijan_stockers - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by Racool_studio - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by jcomp - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by KamranAydinov - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/food'>Food photo created by timolina - www.freepik.com</a>
+
+<a href='https://www.freepik.com/photos/bakery'>Bakery photo created by azerbaijan_stockers - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/party'>Party photo created by KamranAydinov - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/menu'>Menu photo created by Racool_studio - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/restaurant'>Restaurant photo created by timolina - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/mockup'>Mockup photo created by rawpixel.com - www.freepik.com</a>
+
+<a href='https://www.freepik.com/photos/background'>Background photo created by rawpixel.com - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/background'>Background photo created by jcstudio - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/background'>Background photo created by freepik - www.freepik.com</a>
+<a href='https://www.freepik.com/photos/background'>Background photo created by lifeforstock - www.freepik.com</a>
+-->
